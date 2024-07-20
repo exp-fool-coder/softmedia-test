@@ -1,6 +1,6 @@
 package com.expfool.bookkeeper.repositories;
 
-import com.expfool.bookkeeper.Entities.Payment;
+import com.expfool.bookkeeper.entities.Payment;
 import org.springframework.data.repository.Repository;
 
 @org.springframework.stereotype.Repository

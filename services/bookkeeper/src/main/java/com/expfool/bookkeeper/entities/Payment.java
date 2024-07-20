@@ -1,4 +1,4 @@
-package com.expfool.bookkeeper.Entities;
+package com.expfool.bookkeeper.entities;
 
 import lombok.Getter;
 import lombok.Setter;
