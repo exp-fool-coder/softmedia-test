@@ -1,5 +1,6 @@
 package com.expfool.bookkeeper.dto;
 
+import com.expfool.bookkeeper.entities.Payment;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;

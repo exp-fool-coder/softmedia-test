@@ -1,6 +1,7 @@
 package com.expfool.bookkeeper.configuration;
 
 import com.expfool.bookkeeper.managers.PaymentManager;
+import com.expfool.bookkeeper.repositories.PaymentRepository;
 import com.expfool.bookkeeper.services.KafkaConsumerListeners;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -9,8 +10,12 @@ import org.springframework.context.annotation.Configuration;
 public class SpringConfiguration {
 
     @Bean
-    public PaymentManager paymentManager() {
-        return new PaymentManager();
+    public PaymentManager paymentManager(
+            PaymentRepository paymentRepository
+    ) {
+        return new PaymentManager(
+                paymentRepository
+        );
     }
 
     @Bean
