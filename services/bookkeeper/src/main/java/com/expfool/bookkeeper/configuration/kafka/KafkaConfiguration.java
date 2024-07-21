@@ -34,7 +34,7 @@ public class KafkaConfiguration {
         Map<String, Object> props = new HashMap<>();
         props.put(
                 ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG,
-                "host.docker.internal:29092"
+                "PLAINTEXT_HOST://localhost:9092"
         );
         props.put(
                 ConsumerConfig.GROUP_ID_CONFIG,
