@@ -13,10 +13,12 @@ public class SpringConfiguration {
 
     @Bean
     public PaymentManager paymentManager(
-            PaymentRepository paymentRepository
+            PaymentRepository paymentRepository,
+            OkvedService okvedService
     ) {
         return new PaymentManager(
-                paymentRepository
+                paymentRepository,
+                okvedService
         );
     }
 
