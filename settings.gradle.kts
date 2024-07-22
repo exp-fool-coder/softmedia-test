@@ -1,4 +1,4 @@
 rootProject.name = "softmedia-test"
 
-include("services:statz")
 include("services:bookkeeper:app")
+include("services:statz:app")
