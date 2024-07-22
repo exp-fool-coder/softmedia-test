@@ -1,3 +1,9 @@
+buildscript {
+    dependencies {
+        classpath("com.google.protobuf:protobuf-gradle-plugin:0.9.4")
+    }
+}
+
 plugins {
     java
 }

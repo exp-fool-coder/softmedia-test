@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+
+option java_package = "com.expfool.bookkeeper.api.proto";
+option java_outer_classname ="BookkeeperProto";
+
+service BookkeeperService {
+  rpc getClientStatistic (GetClientStatisticRequest) returns (GetClientStatisticResponse) {}
+}
+
+message GetClientStatisticRequest {
+  string client_id = 1;
+  google.protobuf.Timestamp start_date = 2;
+  google.protobuf.Timestamp end_date = 3;
+}
+
+message GetClientStatisticResponse {
+  string answer = 1;
+}
