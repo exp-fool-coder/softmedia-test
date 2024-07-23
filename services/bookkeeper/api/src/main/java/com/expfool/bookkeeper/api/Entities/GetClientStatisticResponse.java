@@ -2,20 +2,22 @@ package com.expfool.bookkeeper.api.Entities;
 
 import com.expfool.bookkeeper.api.proto.BookkeeperProto;
 
+import java.util.List;
+
 public record GetClientStatisticResponse(
-        String answer
+        List<Payment> payments
 ) {
 
     public GetClientStatisticResponse(BookkeeperProto.GetClientStatisticResponse protoResponse) {
         this(
-            protoResponse.getAnswer()
+            protoResponse.getPaymentsList().stream().map(Payment::new).toList()
         );
     }
 
 
     public BookkeeperProto.GetClientStatisticResponse toProto() {
         var builder = BookkeeperProto.GetClientStatisticResponse.newBuilder();
-        builder.setAnswer(answer);
+        builder.addAllPayments(payments.stream().map(Payment::toProto).toList());
         return builder.build();
     }
 }

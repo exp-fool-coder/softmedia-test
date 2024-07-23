@@ -3,9 +3,12 @@ package com.expfool.bookkeeper.app.entities;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.elasticsearch.annotations.DateFormat;
 import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
+
+import java.util.Date;
 
 
 @Getter
@@ -46,5 +49,23 @@ public class Payment {
     @Setter
     @Field(type = FieldType.Text, name = "receiver_bic")
     private String receiverBIC;
+
+    @Setter
+    @Field(type = FieldType.Date, name = "payment_time", format = DateFormat.date_time)
+    private Date paymentTime;
+
+    public com.expfool.bookkeeper.api.Entities.Payment toApiPayment() {
+        return new com.expfool.bookkeeper.api.Entities.Payment(
+                clientId,
+                amount,
+                okvedCategory,
+                okvedCode,
+                senderAccountNumber,
+                senderBIC,
+                receiverAccountNumber,
+                receiverBIC,
+                paymentTime.toInstant()
+        );
+    }
 
 }
