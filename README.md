@@ -18,9 +18,9 @@
 "okvedCode": "51.22.3",
 "amount": 2000,
 "senderAccountNumber": "321",
-"senderBic": "234",
+"senderBIC": "234",
 "receiverAccountNumber": "123",
-"receiverBic": "432",
+"receiverBIC": "432",
 "paymentTime": "2001-10-10 11:11:11.111",
 "created": "2001-10-10 11:11:11.111",
 "updated": "2001-10-10 11:11:11.111"
