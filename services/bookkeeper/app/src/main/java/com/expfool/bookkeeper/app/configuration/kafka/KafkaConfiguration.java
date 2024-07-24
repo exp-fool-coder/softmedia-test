@@ -3,6 +3,7 @@ package com.expfool.bookkeeper.app.configuration.kafka;
 import com.expfool.bookkeeper.app.dto.kafka.AbstractDto;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.annotation.EnableKafka;
@@ -19,6 +20,13 @@ import java.util.Map;
 @Configuration
 public class KafkaConfiguration {
 
+    @Value("${kafka.server}")
+    private String kafkaServer;
+
+    @Value("${kafka.consumers.payments.group_id}")
+    private String paymentsConsumersGroupId;
+
+
     @Bean
     public KafkaListenerContainerFactory<?> paymentMessageListenerContainerFactory() {
         ConcurrentKafkaListenerContainerFactory<Long, AbstractDto> factory =
@@ -34,11 +42,11 @@ public class KafkaConfiguration {
         Map<String, Object> props = new HashMap<>();
         props.put(
                 ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG,
-                "PLAINTEXT_HOST://localhost:9092"
+                kafkaServer
         );
         props.put(
                 ConsumerConfig.GROUP_ID_CONFIG,
-                "some_specific_consumers"
+                paymentsConsumersGroupId
         );
         props.put(
                 ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG,

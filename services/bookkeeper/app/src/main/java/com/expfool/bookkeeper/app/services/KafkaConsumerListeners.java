@@ -6,6 +6,8 @@ import org.springframework.kafka.annotation.KafkaListener;
 
 public class KafkaConsumerListeners {
 
+    private final String PAYMENT_TOPIC_NAME = "paymentTopic";
+
     private final PaymentManager paymentManager;
 
     public KafkaConsumerListeners(PaymentManager paymentManager) {
@@ -14,7 +16,7 @@ public class KafkaConsumerListeners {
 
     @KafkaListener(
         id = "some_specific_consumers",
-        topics = "paymentTopic",
+        topics = PAYMENT_TOPIC_NAME,
         containerFactory = "paymentMessageListenerContainerFactory"
     )
     public void paymentMessageHandler(PaymentDto message) {
