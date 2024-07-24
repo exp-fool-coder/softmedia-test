@@ -1,8 +1,8 @@
 package com.expfool.statz.app.managers;
 
-import com.expfool.bookkeeper.api.Entities.GetClientStatisticRequest;
-import com.expfool.bookkeeper.api.Entities.GetClientStatisticResponse;
-import com.expfool.bookkeeper.api.Entities.Payment;
+import com.expfool.bookkeeper.api.dto.GetClientStatisticRequest;
+import com.expfool.bookkeeper.api.dto.GetClientStatisticResponse;
+import com.expfool.bookkeeper.api.dto.Payment;
 import com.expfool.bookkeeper.api.Services.BookkeeperService;
 import com.expfool.statz.app.dto.CategoryData;
 import com.expfool.statz.app.dto.GetClientCategoriesStatisticResponse;

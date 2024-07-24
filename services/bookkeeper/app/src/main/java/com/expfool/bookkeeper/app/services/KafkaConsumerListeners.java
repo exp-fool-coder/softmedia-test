@@ -1,6 +1,6 @@
 package com.expfool.bookkeeper.app.services;
 
-import com.expfool.bookkeeper.app.dto.PaymentDto;
+import com.expfool.bookkeeper.app.dto.kafka.PaymentDto;
 import com.expfool.bookkeeper.app.managers.PaymentManager;
 import org.springframework.kafka.annotation.KafkaListener;
 

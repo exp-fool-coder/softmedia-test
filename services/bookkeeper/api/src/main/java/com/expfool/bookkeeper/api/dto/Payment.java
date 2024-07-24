@@ -1,4 +1,4 @@
-package com.expfool.bookkeeper.api.Entities;
+package com.expfool.bookkeeper.api.dto;
 
 import com.expfool.bookkeeper.api.proto.BookkeeperProto;
 

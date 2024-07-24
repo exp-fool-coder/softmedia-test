@@ -16,7 +16,7 @@ public record Payment(
     Instant paymentTime
 ) {
 
-    public Payment(com.expfool.bookkeeper.api.Entities.Payment payment) {
+    public Payment(com.expfool.bookkeeper.api.dto.Payment payment) {
         this(
             payment.clientId(),
             payment.okvedCode(),

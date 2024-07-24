@@ -1,4 +1,4 @@
-package com.expfool.bookkeeper.api.Entities;
+package com.expfool.bookkeeper.api.dto;
 
 import com.google.protobuf.Timestamp;
 

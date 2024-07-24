@@ -1,4 +1,4 @@
-package com.expfool.bookkeeper.app.dto;
+package com.expfool.bookkeeper.app.dto.kafka;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;

@@ -1,7 +1,7 @@
 package com.expfool.bookkeeper.app.services;
 
-import com.expfool.bookkeeper.api.Entities.GetClientStatisticRequest;
-import com.expfool.bookkeeper.api.Entities.GetClientStatisticResponse;
+import com.expfool.bookkeeper.api.dto.GetClientStatisticRequest;
+import com.expfool.bookkeeper.api.dto.GetClientStatisticResponse;
 import com.expfool.bookkeeper.api.proto.BookkeeperProto;
 import com.expfool.bookkeeper.api.proto.BookkeeperServiceGrpc;
 import com.expfool.bookkeeper.app.entities.Payment;

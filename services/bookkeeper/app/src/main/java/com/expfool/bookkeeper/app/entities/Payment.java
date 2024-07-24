@@ -46,8 +46,8 @@ public class Payment {
     @Field(type = FieldType.Date, name = "payment_time", format = DateFormat.date_time)
     private Date paymentTime;
 
-    public com.expfool.bookkeeper.api.Entities.Payment toApiPayment() {
-        return new com.expfool.bookkeeper.api.Entities.Payment(
+    public com.expfool.bookkeeper.api.dto.Payment toApiPayment() {
+        return new com.expfool.bookkeeper.api.dto.Payment(
                 clientId,
                 amount,
                 okvedCategory,

@@ -3,7 +3,7 @@ package com.expfool.bookkeeper.app.managers;
 import co.elastic.clients.elasticsearch._types.query_dsl.QueryBuilders;
 import com.expfool.bookkeeper.app.repositories.PaymentRepository;
 import com.expfool.bookkeeper.app.services.OkvedService;
-import com.expfool.bookkeeper.app.dto.PaymentDto;
+import com.expfool.bookkeeper.app.dto.kafka.PaymentDto;
 import com.expfool.bookkeeper.app.entities.Payment;
 import org.springframework.data.elasticsearch.client.elc.NativeQueryBuilder;
 import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
