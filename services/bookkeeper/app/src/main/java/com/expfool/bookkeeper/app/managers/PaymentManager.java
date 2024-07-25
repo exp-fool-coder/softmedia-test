@@ -69,9 +69,18 @@ public class PaymentManager {
             .to(formattedEndTime).format("yyyy-MM-dd HH:mm:ss")
         );
         var matchQuery = QueryBuilders.match(q -> q.field("client_id").query(clientId));
-        var searchQuery = QueryBuilders.bool(q -> q.must(timeQuery).must(matchQuery));
-        var qwe = new NativeQueryBuilder().withQuery(searchQuery).build();
-        SearchHits<Payment> payments = elasticsearchOperations.search(qwe, Payment.class);
+        var udefinedCategoryQuery = QueryBuilders.match(q ->
+            q.field("okved_category").query(TransactionCategories.UNDEFINED_CATEGORY.name())
+        );
+        var innerTransactionCategoryQuery = QueryBuilders.match(q ->
+            q.field("okved_category").query(TransactionCategories.INNER_ACCOUNT_TO_ACCOUNT_TRANSFER.name())
+        );
+        var searchQuery = QueryBuilders.bool(q ->
+            q.must(timeQuery).must(matchQuery)
+            .mustNot(udefinedCategoryQuery).mustNot(innerTransactionCategoryQuery)
+        );
+        var query = new NativeQueryBuilder().withQuery(searchQuery).build();
+        SearchHits<Payment> payments = elasticsearchOperations.search(query, Payment.class);
 
         return payments.stream().map(SearchHit::getContent).toList();
     }
