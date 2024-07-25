@@ -45,7 +45,6 @@ public class PaymentManager {
         }
 
         Payment payment = new Payment();
-        payment.setId(paymentMessage.getId().toString());
         payment.setClientId(paymentMessage.getClientId());
         payment.setOkvedCategory(category.name());
         payment.setOkvedCode(paymentMessage.getOkvedCode());

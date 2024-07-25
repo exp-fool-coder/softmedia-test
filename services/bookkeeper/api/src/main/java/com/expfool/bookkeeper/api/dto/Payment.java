@@ -35,7 +35,9 @@ public record Payment(
         builder.setClientId(clientId);
         builder.setAmount(amount);
         builder.setOkvedCategory(okvedCategory);
-        builder.setOkvedCode(okvedCode);
+        if (okvedCode != null) {
+            builder.setOkvedCode(okvedCode);
+        }
         builder.setSenderAccountNumber(senderAccountNumber);
         builder.setSenderBic(senderBic);
         builder.setReceiverAccountNumber(receiverAccountNumber);
