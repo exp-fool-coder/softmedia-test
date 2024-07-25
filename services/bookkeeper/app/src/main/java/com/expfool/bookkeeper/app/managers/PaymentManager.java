@@ -1,6 +1,8 @@
 package com.expfool.bookkeeper.app.managers;
 
 import co.elastic.clients.elasticsearch._types.query_dsl.QueryBuilders;
+import com.expfool.bookkeeper.app.entities.TransactionCategories;
+import com.expfool.bookkeeper.app.exceptions.NotFoundOkvedCategory;
 import com.expfool.bookkeeper.app.repositories.PaymentRepository;
 import com.expfool.bookkeeper.app.services.OkvedService;
 import com.expfool.bookkeeper.app.dto.kafka.PaymentDto;
@@ -15,6 +17,7 @@ import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 public class PaymentManager {
 
@@ -29,18 +32,22 @@ public class PaymentManager {
     }
 
     public Payment recordPaymentDetails(PaymentDto paymentMessage) {
-        String category;
+        TransactionCategories category;
         try {
-            category = okvedService.getOkvedCategoryByCode(paymentMessage.getOkvedCode());
-        } catch (Exception e) {
-            //todo: something bad happened about okved request
-            category = "";
+            category = getCategoryByOkvedCode(
+                    paymentMessage.getOkvedCode(),
+                    paymentMessage.getSenderBIC(),
+                    paymentMessage.getReceiverBIC()
+            );
+        } catch (NotFoundOkvedCategory e) {
+            //TODO: does it need to save it or log and ignore it
+            category = TransactionCategories.UNDEFINED_CATEGORY;
         }
 
         Payment payment = new Payment();
         payment.setId(paymentMessage.getId().toString());
         payment.setClientId(paymentMessage.getClientId());
-        payment.setOkvedCategory(category);
+        payment.setOkvedCategory(category.name());
         payment.setOkvedCode(paymentMessage.getOkvedCode());
         payment.setAmount(paymentMessage.getAmount());
         payment.setSenderAccountNumber(paymentMessage.getSenderAccountNumber());
@@ -68,5 +75,26 @@ public class PaymentManager {
         SearchHits<Payment> payments = elasticsearchOperations.search(qwe, Payment.class);
 
         return payments.stream().map(SearchHit::getContent).toList();
+    }
+
+    private TransactionCategories getCategoryByOkvedCode(
+            String okvedCode,
+            String senderBIC,
+            String receiverBIC
+    ) throws NotFoundOkvedCategory {
+        TransactionCategories category;
+        if (okvedCode == null || okvedCode.isEmpty()) {
+            category = Objects.equals(senderBIC, receiverBIC)
+                    ? TransactionCategories.INNER_ACCOUNT_TO_ACCOUNT_TRANSFER
+                    : TransactionCategories.ACCOUNT_TO_ACCOUNT_TRANSFER;
+        } else {
+            try {
+                String okvedCategory = okvedService.getOkvedCategoryByCode(okvedCode);
+                category = TransactionCategories.valueOf(okvedCategory);
+            } catch (Exception e) {
+                throw new NotFoundOkvedCategory("Not found category for " + okvedCode);
+            }
+        }
+        return category;
     }
 }

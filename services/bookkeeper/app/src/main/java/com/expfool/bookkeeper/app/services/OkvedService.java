@@ -20,6 +20,7 @@ public class OkvedService {
         this.restTemplate = restTemplateBuilder.build();
     }
 
+    //TODO: may be rewrite it to async WebClient, now it sync RestTemplate temporary
     @Cacheable(value = "okvedCode", key = "#code")
     public String getOkvedCategoryByCode(String code) throws Exception {
         String apiUrl = "http://suggestions.dadata.ru/suggestions/api/4_1/rs/findById/okved2";
